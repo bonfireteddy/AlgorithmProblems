@@ -31,40 +31,32 @@ public class Solution {
 			
 			int[][] arr = new int[snailSize][snailSize];
 			
-			int value = 1; 
-			
-			while(value == snailSize*snailSize) {
-				 
-				int n = snailSize;
-				int x = 0;
-				int y = 0;
-				
-				// 우향 진행
-				for(int a = 0; a < n; a++) {
-					value++;
-					arr[x][y+a] = value;
-				}
-				// 하향 진행
-				for(int a = 0; a < n; a++) {
-					value++;
-					arr[x][y] = value;
-				}
-				// 좌향 진행
-				for(int a = n-1; a == 0; a--) {
-					value++;
-					arr[x][y] = value;
-				}
-				// 상향 진행 -> 여기서 달팽이 크기 작아짐 고려해야함
-				for(int a = n-1; a == 0; a--) {
-					value++;
-					arr[x][y] = value;
-				}
-				
-				n -= 2;
-			
-				
-				System.out.println();
-			}
+			int value = 1;
+	        int start = 0;
+	        int end = snailSize - 1;
+	        
+	        while (start <= end) {
+	            // → 오른쪽
+	            for (int i = start; i <= end; i++) {
+	                arr[start][i] = value++;
+	            }
+	            // ↓ 아래
+	            for (int i = start + 1; i <= end; i++) {
+	                arr[i][end] = value++;
+	            }
+	            // ← 왼쪽
+	            for (int i = end - 1; i >= start; i--) {
+	                arr[end][i] = value++;
+	            }
+	            // ↑ 위
+	            for (int i = end - 1; i > start; i--) {
+	                arr[i][start] = value++;
+	            }
+	            
+	            start++;
+	            end--;
+	            
+	        }
 			
 			value = 0;
 			
