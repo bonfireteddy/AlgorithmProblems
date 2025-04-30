@@ -27,10 +27,6 @@ public class Solution {
 			}
 		
 			// 최적화 부분
-			// 숫자가 3개인데 교환 기회가 10번이면
-			// 똑같은 패턴만 계속 나오기 때문에 
-			// 굳이 10번 다 안하고 3번정도만 바꿔도 모든 경우가 다 나온다.
-			// 그럼 숫자가 6개인 경우에 모든 경우의 수가 다 나오는 건 몇개지? 
 			if (arr.length < changeCount) {
 				changeCount = arr.length;
             }
