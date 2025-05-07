@@ -58,8 +58,6 @@ public class Solution {
 	            
 	        }
 			
-			value = 0;
-			
 			System.out.printf("#%d\n", test_case);
 			
 			for(int a = 0; a < snailSize; a++) {
