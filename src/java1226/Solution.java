@@ -92,4 +92,9 @@ public class Solution {
 		// 종료 조건 - 도착지점 발견 X
 		return 0;
 	}
+	
+	public static int bfs(Point point) {
+		
+		return 0;
+	}
 }
