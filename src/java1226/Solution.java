@@ -82,17 +82,25 @@ public class Solution {
 			return 1;
 		}
 		
-		if(!visited[point.x][point.y+1] && arr[point.x][point.y+1] == 0) {
-			dfs(new Point(point.x, point.y+1));
+		if(!visited[point.x][point.y+1] && arr[point.x][point.y+1] != 1) {
+			if(dfs(new Point(point.x, point.y+1)) == 1) {
+				return 1;
+			}
 		} 
-		if(!visited[point.x][point.y-1] &&arr[point.x][point.y-1] == 0) {
-			dfs(new Point(point.x, point.y-1));
+		if(!visited[point.x][point.y-1] &&arr[point.x][point.y-1] != 1) {
+			if(dfs(new Point(point.x, point.y-1)) == 1) {
+				return 1;
+			}
 		} 
-		if(!visited[point.x-1][point.y] &&arr[point.x-1][point.y] == 0) {
-			dfs(new Point(point.x-1, point.y));
+		if(!visited[point.x-1][point.y] &&arr[point.x-1][point.y] != 1) {
+			if(dfs(new Point(point.x-1, point.y)) == 1) {
+				return 1;
+			}
 		} 
-		if(!visited[point.x+1][point.y] &&arr[point.x+1][point.y] == 0) {
-			dfs(new Point(point.x+1, point.y));
+		if(!visited[point.x+1][point.y] &&arr[point.x+1][point.y] != 1) {
+			if(dfs(new Point(point.x+1, point.y)) == 1) {
+				return 1;
+			}
 		}
 		
 		// 종료 조건 - 도착지점 발견 X
