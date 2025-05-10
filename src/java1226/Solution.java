@@ -35,7 +35,6 @@ public class Solution {
 			int result = 0;
 			Point point = new Point(0,0);
 			
-			// 공백이 없을 때는 StringTokenizer보다 charAt이 유리하다 
 			for(int a = 0; a < arr.length; a++) {
 				String line = br.readLine(); // 한 줄씩 입력
 
@@ -63,43 +62,30 @@ public class Solution {
 
 	}
 	
-	// 진행하다가 1만나면 0이 있는 다른 방향으로 가면 되는데
-	// dfs로 하는거면 방향전환 기준이 뭘까?
+	
 	public static int dfs(Point point) {
 		
-		// x,y 기준으로 상하좌우 요소가 1인지 0인지 확인
-		// 0인쪽으로 x,y를 갱신해 나가면서 분기점 발견
-		// 분기점 좌표 기억해놓고 상하좌우 순서로 탐색
-		// 근데 이 분기점 좌표를 여러개 저장을 해놓아야함.
-		// 그리고 탐색이 끝나면 마지막에 저장해놨던 가장 최근 분기점으로 
-		// 돌아가서 다른 경로를 탐색한다.
-		
-		// x, y기준으로 상하좌우 계산하는 좌표가 뭘까?
 		// 방문 기록 저장
 		visited[point.x][point.y] = true;
+		
 		// 종료 조건 - 도착지점 3 발견
 		if (arr[point.x][point.y] == 3) {
 			return 1;
 		}
 		
-		if(!visited[point.x][point.y+1] && arr[point.x][point.y+1] != 1) {
-			if(dfs(new Point(point.x, point.y+1)) == 1) {
-				return 1;
-			}
-		} 
-		if(!visited[point.x][point.y-1] &&arr[point.x][point.y-1] != 1) {
-			if(dfs(new Point(point.x, point.y-1)) == 1) {
-				return 1;
-			}
-		} 
-		if(!visited[point.x-1][point.y] &&arr[point.x-1][point.y] != 1) {
-			if(dfs(new Point(point.x-1, point.y)) == 1) {
-				return 1;
-			}
-		} 
-		if(!visited[point.x+1][point.y] &&arr[point.x+1][point.y] != 1) {
-			if(dfs(new Point(point.x+1, point.y)) == 1) {
-				return 1;
+		int[] dx = {0,0,1,-1}; // 좌우
+		int[] dy = {1,-1,0,0}; // 상하
+		
+		for(int a = 0; a < 4; a++) { // 상하우좌 순으로 탐색
+			int nx = point.x + dx[a];
+			int ny = point.y + dy[a];
+			
+			if (nx >= 0 && ny >= 0 && nx < 16 && ny < 16) {
+				if(!visited[nx][ny] && arr[nx][ny] != 1) {
+					if(dfs(new Point(nx, ny)) == 1) {
+						return 1;
+					}
+				}
 			}
 		}
 		
