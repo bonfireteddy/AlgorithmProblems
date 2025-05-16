@@ -29,7 +29,7 @@ public class Solution {
 			
 			int N = Integer.parseInt(br.readLine());
 			arr = new String[N][N];
-			resultArr = new String[N][N];
+			resultArr = new String[N][3];
 			
 			for(int a = 0; a < N; a++) {
 				StringTokenizer st = new StringTokenizer(br.readLine());
@@ -42,45 +42,39 @@ public class Solution {
 			for(int a = 0; a < N; a++) {
 				StringBuilder sb = new StringBuilder();
 				for(int b = N-1; b >= 0; b--) {
-					sb.append(arr[N-1][a]);
+					sb.append(arr[b][a]);
 				}
 				
 				//출력할 배열에 저장
-				for(int i = 0; i < N; i++) {
-					resultArr[i][0] = sb.toString();
-				}
+				resultArr[a][0] = sb.toString();
 			}
 			
-//			// 180도 계산
-//			for(int a = 0; a < N; a++) {
-//				StringBuilder sb = new StringBuilder();
-//				for(int b = N-1; b >= 0; b--) {
-//					sb.append(arr[N-1][a]);
-//				}
-//				
-//				//출력할 배열에 저장
-//				for(int i = 0; i < N; i++) {
-//					resultArr[i][0] = sb.toString();
-//				}
-//			}
-//			
-//			// 270도 계산
-//			for(int a = 0; a < N; a++) {
-//				StringBuilder sb = new StringBuilder();
-//				for(int b = N-1; b >= 0; b--) {
-//					sb.append(arr[N-1][a]);
-//				}
-//				
-//				//출력할 배열에 저장
-//				for(int i = 0; i < N; i++) {
-//					resultArr[i][0] = sb.toString();
-//				}
-//			}
+			// 180도 계산
+			for(int a = N-1; a >= 0; a--) {
+				StringBuilder sb = new StringBuilder();
+				for(int b = N-1; b >= 0; b--) {
+					sb.append(arr[a][b]);
+				}
+				
+				//출력할 배열에 저장
+				resultArr[N-(a+1)][1] = sb.toString();
+			}
+			
+			// 270도 계산
+			for(int a = N-1; a >= 0; a--) {
+				StringBuilder sb = new StringBuilder();
+				for(int b = 0; b < N; b++) {
+					sb.append(arr[b][a]);
+				}
+				
+				//출력할 배열에 저장
+				resultArr[N-(a+1)][2] = sb.toString();
+			}
 			
 			System.out.printf("#%d\n", test_case);
 			
 			for(int a = 0; a < N; a++) {
-				for(int b = 0; b < N; b++) {
+				for(int b = 0; b < 3; b++) {
 					System.out.print(resultArr[a][b]+" ");
 				}
 				System.out.println();
