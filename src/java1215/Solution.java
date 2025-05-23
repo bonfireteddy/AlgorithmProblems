@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Solution {
 	
@@ -37,68 +35,28 @@ public class Solution {
 				}
 			}
 			
-			List<String> CurrentList = new ArrayList<>();
-			
-			// 8x8 반복
-			for(int a = 0; a < 8; a++) { // 세로줄
-				
-				for(int b = 0; b <= 8-N; b++) { // 가로줄 탐색횟수
-					CurrentList = new ArrayList<>();
-					for(int i = b; i < N+b; i++) { // 횟수마다 N개씩탐색
-						CurrentList.add(arr[a][i]);
-					}
-					
-					for(int i = 0; i < N; i++) {
-						//System.out.print(CurrentList.get(i)+" ");
-					}	
-					
-					boolean check = true;
-					// 팰린드롬이 맞는지 확인
-					for(int p = 0; p < N/2; p++) {
-						String f = CurrentList.get(p);
-						String e = CurrentList.get(CurrentList.size()-p-1);
-						if(!f.equals(e)) {
-							check = false;
-						}
-					}
-					
-					if(check) {
-						result++; // 맞으면 result에 ++
-					}
-					//System.out.println();
-				}
-				
-			}
-			
-			// 8x8 반복
-			for(int a = 0; a < 8; a++) { // 세로줄
-				
-				for(int b = 0; b <= 8-N; b++) { // 가로줄 탐색횟수
-					CurrentList = new ArrayList<>();
-					for(int i = b; i < N+b; i++) { // 횟수마다 N개씩탐색
-						CurrentList.add(arr[i][a]);
-					}
-					
-					for(int i = 0; i < N; i++) {
-						//System.out.print(CurrentList.get(i)+" ");
-					}	
-					
-					boolean check = true;
-					// 팰린드롬이 맞는지 확인
-					for(int p = 0; p < N/2; p++) {
-						String f = CurrentList.get(p);
-						String e = CurrentList.get(CurrentList.size()-p-1);
-						if(!f.equals(e)) {
-							check = false;
-						}
-					}
-					
-					if(check) {
-						result++; // 맞으면 result에 ++
-					}
-					//System.out.println();
-				}
-				
+			for (int a = 0; a < 8; a++) {
+			    for (int b = 0; b <= 8 - N; b++) {
+			        // 가로 팰린드롬 검사
+			        boolean rowPalin = true;
+			        for (int p = 0; p < N / 2; p++) {
+			            if (!arr[a][b + p].equals(arr[a][b + N - 1 - p])) {
+			                rowPalin = false;
+			                break;
+			            }
+			        }
+			        if (rowPalin) result++;
+
+			        // 세로 팰린드롬 검사
+			        boolean colPalin = true;
+			        for (int p = 0; p < N / 2; p++) {
+			            if (!arr[b + p][a].equals(arr[b + N - 1 - p][a])) {
+			                colPalin = false;
+			                break;
+			            }
+			        }
+			        if (colPalin) result++;
+			    }
 			}
 			
 			System.out.printf("#%d %d\n", t, result);
