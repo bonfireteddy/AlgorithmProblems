@@ -42,27 +42,64 @@ public class Solution {
 			// 8x8 반복
 			for(int a = 0; a < 8; a++) { // 세로줄
 				
-				for(int b = 0; b < 8-N+1; b++) { // 가로줄 탐색횟수
+				for(int b = 0; b <= 8-N; b++) { // 가로줄 탐색횟수
 					CurrentList = new ArrayList<>();
-					for(int i = 0; i < N; i++) { // 횟수마다 N개씩탐색
-						CurrentList.add(arr[a][N-1+i]);
+					for(int i = b; i < N+b; i++) { // 횟수마다 N개씩탐색
+						CurrentList.add(arr[a][i]);
 					}
 					
 					for(int i = 0; i < N; i++) {
-						System.out.print(CurrentList.get(i)+" ");
+						//System.out.print(CurrentList.get(i)+" ");
 					}	
 					
-					boolean check = false;
+					boolean check = true;
 					// 팰린드롬이 맞는지 확인
+					for(int p = 0; p < N/2; p++) {
+						String f = CurrentList.get(p);
+						String e = CurrentList.get(CurrentList.size()-p-1);
+						if(!f.equals(e)) {
+							check = false;
+						}
+					}
 					
 					if(check) {
 						result++; // 맞으면 result에 ++
 					}
+					//System.out.println();
 				}
 				
-				System.out.println();
 			}
 			
+			// 8x8 반복
+			for(int a = 0; a < 8; a++) { // 세로줄
+				
+				for(int b = 0; b <= 8-N; b++) { // 가로줄 탐색횟수
+					CurrentList = new ArrayList<>();
+					for(int i = b; i < N+b; i++) { // 횟수마다 N개씩탐색
+						CurrentList.add(arr[i][a]);
+					}
+					
+					for(int i = 0; i < N; i++) {
+						//System.out.print(CurrentList.get(i)+" ");
+					}	
+					
+					boolean check = true;
+					// 팰린드롬이 맞는지 확인
+					for(int p = 0; p < N/2; p++) {
+						String f = CurrentList.get(p);
+						String e = CurrentList.get(CurrentList.size()-p-1);
+						if(!f.equals(e)) {
+							check = false;
+						}
+					}
+					
+					if(check) {
+						result++; // 맞으면 result에 ++
+					}
+					//System.out.println();
+				}
+				
+			}
 			
 			System.out.printf("#%d %d\n", t, result);
 		}
