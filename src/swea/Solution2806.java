@@ -1,0 +1,11 @@
+package swea;
+
+public class Solution2806 {
+
+	public static void main(String[] args) throws Exception {
+		
+		System.out.println("1234");
+		
+	}
+
+}
