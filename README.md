@@ -1,1 +1,1 @@
-# SWEAproblems
+# AlgorithmProblems
