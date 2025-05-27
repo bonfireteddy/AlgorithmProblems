@@ -49,7 +49,7 @@ public class Solution2817 {
 	
 	// start: 탐색 시작 인덱스
 	// depth: 현재까지 선택한 개수
-	// r: 목표로 하는 조합의 길이
+	// r: 목표로 하는 조합의 길이 
 	static void dfs(int start, int depth, int r, List<Integer> comb, int sum) {
 		if(sum > K) return; // 가지치기: 합이 이미 k를 넘으면 더 이상 탐색할 필요 없음
 		
