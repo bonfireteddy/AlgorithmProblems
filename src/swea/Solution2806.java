@@ -16,11 +16,12 @@ public class Solution2806 {
 	
 	static int[][] arr;
 	static int result;
+	static int temp;
 	static int N;
 	
 	public static void main(String[] args) throws Exception {
 		
-		System.setIn(new FileInputStream("sample_input.txt"));
+		System.setIn(new FileInputStream("res/sample_input.txt"));
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		
 		int T = Integer.parseInt(br.readLine());
@@ -42,29 +43,52 @@ public class Solution2806 {
 			
 			dfs(0, 0);
 			
-			System.out.printf("#%d %d", t, result);
+			System.out.printf("#%d %d\n", t, result);
 		}
 	}
 	
+	// 어떻게 해서 경우의 수를 계산할건지 잘 생각해 봐야할 것 같음.
 	static void dfs(int a, int b) {
 		
 		int da[] = {-1,-1,-1,0,1,1,1,0};
 		int db[] = {-1,0,1,1,1,0,-1,-1};
 		
-		for(int i = 0; i < 8; i++) {
+		int[][] tmpArr = arr;
+		
+		for(int i = 0; i < 8; i++) { // 8뱡향 탐색
 			
 			int na = a;
 			int nb = b;
 			
-			for(int j = 0; j < N; j++) {
+			for(int j = 0; j < N-1; j++) {
 				na += da[i];
 				nb += db[i];
 				
-				if(na < 0 || nb < 0 || na >= N || nb >= N ) {
-					break;
+				if(tmpArr[na][nb] == 2) {
+					// 2일 경우 퀸이 공격가능하기 때문에 arr[a][b]자리에는 둘 수 없음
+					return; 
 				}
-				if(arr[na][nb] == 1) {
-					arr[na][nb] = 0;
+				if(na < 0 || nb < 0 || na >= N || nb >= N) {
+					break; // 1방향 진행 멈춤
+				}
+				if(tmpArr[na][nb] == 1) {
+					tmpArr[na][nb] = 0;
+				}
+			}
+		}
+		
+		
+		arr = tmpArr; // 퀸이 겹치지 않은 경우 0으로 만들어준 부분을 원본 arr에 복사
+		temp++;
+		if(temp == N) {
+			result++;
+			temp--;
+		}
+		// 여기서 arr배열중에 남는 1골라서 dfs에 넣는 방식.
+		for(int i = 0; i < N; i++) {
+			for(int j = 0; j < N; j++) {
+				if(arr[i][j] == 1) {
+					dfs(i, j);
 				}
 			}
 		}
