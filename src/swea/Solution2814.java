@@ -43,7 +43,9 @@ public class Solution2814 {
 				adj[y].add(x);
 			}
 			
-			dfs(1, 1);
+			for(int a = 1; a <= N; a++) {
+				dfs(a, 1); // 모든 정점에서 DFS 시작
+			}
 			
 			System.out.printf("#%d %d\n", t, result);
 		}
