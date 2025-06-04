@@ -26,8 +26,8 @@ public class Main1987 {
 		
 		C = Integer.parseInt(st.nextToken());
 		R = Integer.parseInt(st.nextToken());
-		
 		arr = new char[C][R];
+		result = 1; // 지나간 칸 수
 		
 		for(int a = 0; a < C; a++) {
 			String line = br.readLine();
@@ -36,7 +36,43 @@ public class Main1987 {
 			}
 		}
 		
+		dfs(0, 0, 1);
 		
+		System.out.println(result);
 	}
-
+	
+	static void dfs(int a, int b, int depth) {
+		map.put(arr[a][b], true);
+		result = Math.max(result, depth);
+		
+		int[] da = {-1,1,0,0};
+		int[] db = {0,0,-1,1};
+		
+		int na, nb;
+		for(int i = 0; i < 4; i++) {
+			na = da[i] + a;
+			nb = db[i] + b;
+			
+			if(na >= 0 && na < C && nb >= 0 && nb < R && !map.containsKey(arr[na][nb])) {
+				dfs(na, nb, depth+1);
+			}
+		}
+		map.remove(arr[a][b]);
+	}
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
