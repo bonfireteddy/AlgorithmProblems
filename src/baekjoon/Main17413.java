@@ -16,43 +16,41 @@ public class Main17413 {
 	public static void main(String[] args) throws Exception {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String str = br.readLine();
+		String input = br.readLine();
 		
-		char[] arr = new char[str.length()];
-		Stack<Character> st = new Stack<Character>();
+		Deque<Character> dq = new ArrayDeque<>();
 		StringBuilder sb = new StringBuilder();
-		boolean open = true; // stack에 넣을지 말지 상태 지정
-		for(int a = 0; a < str.length(); a++) {
+		boolean isTag = false; // Deque에 넣을지 말지 상태 지정
+		
+		for(char ch : input.toCharArray()) {
 			
-			char c = str.charAt(a);
-			if(c == '<') {
-				open = false;
-				while(!st.isEmpty()) {
-					sb.append(st.pop());
-				}
-			}
-			if(c == '>') {
-				open = true;
-				sb.append(str.charAt(a));
-			}
-			if(!open){
-				sb.append(str.charAt(a));
-			}else if(open && c == ' ') { // 공백을 만나면 그때 stack 전부 pop
-				while(!st.isEmpty()) {
-					sb.append(st.pop());
+			if(ch == ' ' && !isTag) {
+				while(!dq.isEmpty()) {
+					sb.append(dq.pollLast());
 				}
 				sb.append(' ');
-			}else if(open && c != '<' && c != '>'){
-				st.add(c);
+			}else if(ch == '<') {
+				isTag = true;
+				while(!dq.isEmpty()) {
+					sb.append(dq.pollLast());
+				}
+				sb.append(ch);
+			}else if(ch == '>') {
+				isTag = false;
+				while(!dq.isEmpty()) {
+					sb.append(dq.pollFirst());
+				}
+				sb.append(ch);
+			}else {
+				dq.addLast(ch);
 			}
 			
 		}
-		
-		while(!st.isEmpty()) {
-			sb.append(st.pop());
+		// 마지막 단어 처리
+		while(!dq.isEmpty()) {
+			sb.append(dq.pollLast());
 		}
-		
-		System.out.println(sb);
+		System.out.println(sb.toString());
 	}
 
 }
