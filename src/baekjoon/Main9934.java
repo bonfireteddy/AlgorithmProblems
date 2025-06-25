@@ -51,6 +51,7 @@ public class Main9934 {
 		K = Integer.parseInt(br.readLine());
 		
 		N = (int)Math.pow(2, K)-1; // 완전 이진 트리의 총 노드 수 = 2^K-1;
+		// N = (1 << K) - 1; -> 이 방식도 가능
 		
 		inorderArr = new int[N];
 		
