@@ -19,7 +19,7 @@ public class Main9934 {
 	static StringBuilder inorderSB = new StringBuilder();
     static StringBuilder preorderSB = new StringBuilder();
     static StringBuilder postorderSB = new StringBuilder();
-	
+    static StringBuilder levelorderSB = new StringBuilder();
 	/**
      * 중위 순회 배열을 이용하여 트리를 구축하고 노드를 레벨별로 분류하는 재귀 함수
      * @param start 현재 서브트리 중위 순회 시작 인덱스
@@ -46,6 +46,8 @@ public class Main9934 {
 	public static void main(String[] args) throws Exception {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		
 		K = Integer.parseInt(br.readLine());
 		
 		N = (int)Math.pow(2, K)-1; // 완전 이진 트리의 총 노드 수 = 2^K-1;
@@ -77,16 +79,18 @@ public class Main9934 {
 		traverse(0, N-1, 3, 0); // (시작 인덱스, 끝 인덱스, 순회타입, 현재 깊이)
 		
 		// 결과 출력
-		System.out.println(inorderSB.toString());
-        System.out.println(preorderSB.toString());
-        System.out.println(postorderSB.toString());
-		StringBuilder sb = new StringBuilder();
+		bw.write(inorderSB.toString()+ "\n");
+		bw.write(preorderSB.toString()+ "\n");
+		bw.write(postorderSB.toString()+ "\n");
+		
 		for(int i = 0; i < K; i++) {
 			for(int node : resultLevels[i]) {
-				sb.append(node).append(" ");
+				levelorderSB.append(node).append(" ");
 			}
-			sb.append("\n");
+			levelorderSB.append("\n");
 		}
-		System.out.println(sb.toString());
+		bw.write(levelorderSB.toString()+ "\n");
+		
+		bw.flush();
 	}
 }
