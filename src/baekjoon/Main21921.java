@@ -19,26 +19,37 @@ public class Main21921 {
 		int N = Integer.parseInt(st.nextToken());
 		int X = Integer.parseInt(st.nextToken());
 
-		int[] prefix = new int[N + 1];
-
+		int[] arr = new int[N];
+		
 		st = new StringTokenizer(br.readLine());
-		for (int a = 1; a <= N; a++) {
+		for (int a = 0; a < N; a++) {
 			int p = Integer.parseInt(st.nextToken());
-			prefix[a] = prefix[a - 1] + p;
+			arr[a] = p;
 		}
-
-		int max = Integer.MIN_VALUE;
-		int count = 0;
-		for (int a = 1; a <= N - X + 1; a++) {
-			int b = a + X - 1;
-			int sum = prefix[b] - prefix[a - 1];
-
-			if (sum > max) {
-				max = sum;
-				count = 1; // 새로 최댓값 갱신되면 count 리셋
-			} else if(sum == max) {
-				count++; // 기존 최댓값과 같으면 count 증가
+		
+		// 가장 첫 구간의 합을 미리 구해놓는다.
+		int sum = 0;
+		for(int a = 0; a < X; a++) {
+			sum += arr[a];
+		}
+		
+		// 초기 구간도 최대값 후보에 포함
+		int max = sum;
+		int count = 1;
+		
+		int i = 0;
+		int j = X;
+		while(j < N) {
+			sum = sum - arr[i] + arr[j]; // 윈도우를 한 칸 이동
+			
+			if(max == sum) count++;
+			else if(max < sum) {
+				max = Math.max(max, sum);
+				count = 1;
 			}
+			
+			i++;
+			j++;
 		}
 		
 		if(max == 0) {

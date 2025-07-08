@@ -18,7 +18,7 @@ public class Main11728 {
 		int M = Integer.parseInt(st.nextToken());
 		
 		int[] A = new int[N];
-		int[] B = new int[N];
+		int[] B = new int[M];
 		
 		st = new StringTokenizer(br.readLine());
 		for(int a = 0; a < N; a++) {
