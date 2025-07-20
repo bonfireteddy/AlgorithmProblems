@@ -51,7 +51,6 @@ public class Main1713 {
 			}
     	}
     	
-    	
     	// 학생 번호 오름차순 출력
     	frame.sort(Comparator.comparingInt(a -> a.num));
     	
