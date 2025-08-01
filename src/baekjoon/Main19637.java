@@ -1,38 +1,54 @@
 package baekjoon;
 
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main19637 {
-	
-	// 레벨 입력이 오름차순으로 주어졌으니까 기준이 되는 전투력으로
-	// 이분탐색해서 구간 별로 나눈다음 그 구간에 맞게 해탕 전투력으로 출력하면 되나?
-	
-	public static void main(String[] args) throws Exception {
-		
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));		
-		
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		int N = Integer.parseInt(st.nextToken());
-		int M = Integer.parseInt(st.nextToken());
-		
-		Map<String, Integer> powerLevel = new HashMap<>();
-		
-		for(int a = 0; a < N; a++) {
-			st = new StringTokenizer(br.readLine());
-			String name = st.nextToken();
-			int level = Integer.parseInt(st.nextToken());
-			powerLevel.put(name, level);
-		}
-		
-		int[] powerLevels = new int[M];
-		
-		for(int a = 0; a < N; a++) {
-			int level = Integer.parseInt(br.readLine());
-			powerLevels[a] = level;
-		}
-		
-		
-	}
+    static class Title {
+        String name;
+        int power;
 
+        Title(String name, int power) {
+            this.name = name;
+            this.power = power;
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+        int N = Integer.parseInt(st.nextToken()); // 칭호 수
+        int M = Integer.parseInt(st.nextToken()); // 캐릭터 수
+
+        Title[] titles = new Title[N];
+        for (int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+            String name = st.nextToken();
+            int power = Integer.parseInt(st.nextToken());
+            titles[i] = new Title(name, power);
+        }
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < M; i++) {
+            int q = Integer.parseInt(br.readLine());
+
+            int left = 0, right = N - 1, res = N - 1;
+            while (left <= right) {
+                int mid = (left + right) / 2;
+
+                if (q <= titles[mid].power) {
+                    res = mid;
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+
+            sb.append(titles[res].name).append("\n");
+        }
+
+        System.out.println(sb);
+    }
 }
