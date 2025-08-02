@@ -35,14 +35,15 @@ public class Main19637 {
             int q = Integer.parseInt(br.readLine());
 
             int left = 0, right = N - 1, res = N - 1;
+            
             while (left <= right) {
                 int mid = (left + right) / 2;
 
                 if (q <= titles[mid].power) {
-                    res = mid;
-                    right = mid - 1;
+                    res = mid; // 조건 만족 → 일단 정답 후보 저장
+                    right = mid - 1; // 더 작은 index에서 조건 만족할 수 있는지 왼쪽 탐색
                 } else {
-                    left = mid + 1;
+                    left = mid + 1; // 조건 미만이면 오른쪽으로
                 }
             }
 
