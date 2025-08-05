@@ -10,7 +10,7 @@ public class Main1789 {
         long left = 1, right = S;
         long ans = 0;
 
-        while (left <= right) {
+        while (left <= right) {								
             long mid = (left + right) / 2;
             long sum = mid * (mid + 1) / 2;
 
