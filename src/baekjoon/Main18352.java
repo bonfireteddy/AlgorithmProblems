@@ -49,7 +49,7 @@ public class Main18352 {
 			}
 		}
 		
-		// 거리 k인 도시 출력
+		// 거리 k인 도시 출력e
 		boolean found = false;
 		for(int i = 1; i <= N; i++) {
 			if(distance[i] == K) {
