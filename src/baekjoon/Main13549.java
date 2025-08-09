@@ -3,6 +3,7 @@ package baekjoon;
 import java.io.*;
 import java.util.*;
 
+// 다익스트라 기법 활용
 public class Main13549 {
 	static final int MAX = 100_001;
 
