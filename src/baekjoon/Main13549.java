@@ -30,18 +30,18 @@ public class Main13549 {
             if (cur.cost > dist[cur.pos]) continue;
             if (cur.pos == K) break; // 꺼낸 게 최단
 
-            // 가중치 0: 순간이동
+            // 가중치 0: 순간이동 0 비용: x -> 2x
             int nx = cur.pos * 2;
             if (nx < MAX && dist[nx] > cur.cost) {
-                dist[nx] = cur.cost;
-                pq.add(new Node(nx, cur.cost));
+                dist[nx] = cur.cost; // 비용 변화 없음
+                pq.add(new Node(nx, cur.cost)); // 같은 비용으로 큐에 넣음 -> 우선순위 큐 상단에 가까움 
             }
 
-            // 가중치 1: 걷기
+            // 가중치 1: 걷기 1 비용: x-1, x+1
             for (int next : new int[]{cur.pos - 1, cur.pos + 1}) {
                 if (0 <= next && next < MAX && dist[next] > cur.cost + 1) {
-                    dist[next] = cur.cost + 1;
-                    pq.add(new Node(next, cur.cost + 1));
+                    dist[next] = cur.cost + 1; // 비용 1 증가
+                    pq.add(new Node(next, cur.cost + 1)); // 비용이 늘어나서 나중에 꺼내짐
                 }
             }
         }
