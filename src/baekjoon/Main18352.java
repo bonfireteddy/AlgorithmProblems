@@ -4,7 +4,16 @@ import java.util.*;
 import java.io.*;
 
 public class Main18352 {
-
+	
+	static class Node{
+		int num;
+		int cost;
+		
+		Node(int n, int c){
+			this.num = n;
+			this.cost = c;
+		}
+	}
 	public static void main(String[] args) throws Exception {
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -32,22 +41,31 @@ public class Main18352 {
 		
 		// 거리 정보 배열
 		int[] distance = new int[N + 1];
-		Arrays.fill(distance, -1); // 방문 안 한 곳은 -1
+		Arrays.fill(distance, Integer.MAX_VALUE); // 방문 안 한 곳은 최대값
 		distance[X] = 0; // 시작 도시는 거리 0
+			
+		// Dijkstra
+		PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.cost));
+		pq.add(new Node(X, 0));
 		
-		// BFS
-		Queue<Integer> q = new LinkedList<>();
-		q.offer(X);
-		
-		while(!q.isEmpty()) {
-			int cur = q.poll();
-			for(int next : adjList[cur]){
-				if(distance[next] == -1) {
-					distance[next] = distance[cur] + 1;
-					q.offer(next);
-				}
-			}
-		}
+		// 다익스트라 메인 루프
+        while (!pq.isEmpty()) {
+        	Node cur = pq.poll();
+        	
+        	int u = cur.num; 
+			int d = cur.cost;
+        	
+        	if(d != distance[u]) continue; // 오래된 상태 스킵
+        	if(d > K) break; // K를 초과하는 비용은 볼 필요가 없음
+        	
+        	for (int v : adjList[u]) {
+                int nd = d + 1;              // 간선 비용이 1
+                if (nd < distance[v]) {
+                	distance[v] = nd;
+                    pq.add(new Node(v, nd));
+                }
+            }
+        }
 		
 		// 거리 k인 도시 출력e
 		boolean found = false;

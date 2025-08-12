@@ -31,7 +31,6 @@ public class Main13549 {
         PriorityQueue<Node> pq = new PriorityQueue<>((a,b) -> a.cost - b.cost);
         pq.add(new Node(N, 0)); // 시작 위치 삽입
         
-        
         // 다익스트라 메인 루프
         while (!pq.isEmpty()) {
             Node cur = pq.poll();
