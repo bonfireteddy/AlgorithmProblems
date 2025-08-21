@@ -27,7 +27,7 @@ public class Main1753 {
 		Arrays.fill(distance, Integer.MAX_VALUE);
 		distance[K] = 0; // 시작 정점 최단거리는 0
 		
-		PriorityQueue<Node> pq = new PriorityQueue<>((a,b) -> a.weight - b.weight);
+		PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.weight));
 		pq.add(new Node(K, 0)); // 시작정점의 가중치는 0
 		
 		List<Node>[] adjList = new ArrayList[V+1]; // 인접 리스트 생성
