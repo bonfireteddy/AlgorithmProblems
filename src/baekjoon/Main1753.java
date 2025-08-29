@@ -26,7 +26,7 @@ public class Main1753 {
 		int[] distance = new int[V+1]; // 최대 정점의 개수 기준
 		Arrays.fill(distance, Integer.MAX_VALUE);
 		distance[K] = 0; // 시작 정점 최단거리는 0
-		
+		                                                                 
 		PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a.weight));
 		pq.add(new Node(K, 0)); // 시작정점의 가중치는 0
 		
